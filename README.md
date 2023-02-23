@@ -26,7 +26,7 @@ Sample body:
 - ```GET http://localhost:3000/skills/?min_frequency=10&max_frequency=20```: Lists frequency of all skills based on filter
 - ```GET http://localhost:3000/events/```: Lists all events
 - ```GET http://localhost:3000/events/<event_id>```: Returns specified event's information
-- ```GET http://localhost:3000/register/<user_id>```: Changes users 'registered' status to true
+- ```PUT http://localhost:3000/register/<user_id>```: Changes users 'registered' status to true
 - ```POST http://localhost:3000/scan/```: handles QR code scanning and returns updated event information<br/>
 Sample body:
 ```
