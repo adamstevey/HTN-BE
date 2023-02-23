@@ -85,7 +85,7 @@ class DB:
 
     def populate_db(self):
         # Load Hacker Data
-        data = load(open("HTN_2023_BE_Challenge_Data.json"))
+        data = load(open("data/HTN_2023_BE_Challenge_Data.json"))
         cursor = self.conn.cursor()
         for hacker in data:
 
@@ -110,7 +110,7 @@ class DB:
                 cursor.execute(sql, (hacker_id, skill['skill'], skill['rating']))
 
         # Load Event Data  
-        event_data = load(open("HTN_2023_event_data.json"))
+        event_data = load(open("data/HTN_2023_event_data.json"))
         for event in event_data:
 
             # Create event row
