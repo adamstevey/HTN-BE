@@ -55,7 +55,7 @@ def events(event_id=None):
         res = json.dumps(json.loads(db.list_events()), indent=2)
         return Response(res, status=201, mimetype='application/json')
 
-@app.route("/register/<user_id>")
+@app.route("/register/<user_id>", methods=['PUT'])
 def register(user_id=None):
     res = json.dumps(json.loads(db.handle_registration(hacker_id=user_id)), indent=2)
     return Response(res, status=201, mimetype='application/json')
