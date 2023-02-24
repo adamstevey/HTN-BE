@@ -13,7 +13,7 @@ def users(user_id = None):
     if user_id:
         # User Information
         if request.method == 'GET':
-            return Response(json.dumps(json.loads(db.get_hacker(user_id)), indent=2), status=201, mimetype='application/json')
+            return Response(json.dumps(json.loads(db.get_hacker(user_id)), indent=2), status=200, mimetype='application/json')
         #Update User Information
         elif request.method == 'PUT':
             data = json.loads(request.data)
@@ -23,7 +23,7 @@ def users(user_id = None):
     elif not user_id:
         # List all users
         if request.method == 'GET':
-            return Response(json.dumps(json.loads(db.list_hackers()), indent=2), status=201, mimetype='application/json')
+            return Response(json.dumps(json.loads(db.list_hackers()), indent=2), status=200, mimetype='application/json')
 
 @app.route("/skills/")
 def skills():
@@ -31,7 +31,7 @@ def skills():
     min_frequency = args.get('min_frequency')
     max_frequency = args.get('max_frequency')
     res = str(db.list_skill_frequencies(min=min_frequency if min_frequency else 0, max=max_frequency if max_frequency else db.num_hackers()))
-    return Response(json.dumps(json.loads(res), indent=2), status=201, mimetype='application/json')
+    return Response(json.dumps(json.loads(res), indent=2), status=200, mimetype='application/json')
 
 @app.route("/scan/", methods=["POST"])
 def scan():
@@ -42,7 +42,7 @@ def scan():
     except:
         return "Invalid Request. See Documentation"
     res = json.dumps(json.loads(db.handle_scan(event_id=event_id, hacker_id=hacker_id)), indent=2)
-    return Response(res, status=201, mimetype='application/json')
+    return Response(res, status=200, mimetype='application/json')
 
 @app.route("/events/")
 @app.route("/events/<event_id>")
