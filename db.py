@@ -13,6 +13,9 @@ class DB:
             \'skill\', skill,
             \'rating\', rating))
             FROM skill_hacker_join WHERE hacker_id=id'''
+        sql_events_query = '''SELECT json_group_array(json_object(
+            \'title\', (SELECT title FROM events where id=event_id)))
+            FROM event_hacker_join WHERE hacker_id=id'''
         self.sql_hackers_query = f'''SELECT json_group_array(json_object(
             \'id\', id,
             \'name\', name,
@@ -20,7 +23,8 @@ class DB:
             \'email\', email,
             \'phone\', phone,
             \'registered\', registered,
-            \'skills\', ({sql_skills_query})))
+            \'skills\', ({sql_skills_query}),
+            \'events\', ({sql_events_query})))
             FROM hackers'''
         sql_attendees_query = '''SELECT json_group_array(json_object(
             \'name\', (SELECT name from hackers WHERE id=hacker_id)))
@@ -177,7 +181,7 @@ class DB:
             self.conn.commit()
         except:
             return "{\"reponse\": \"invalid id(s) entered\"}"
-        return self.list_events()
+        return self.get_event(event_id=event_id)
     
     def handle_registration(self, hacker_id):
         cursor = self.conn.cursor()
